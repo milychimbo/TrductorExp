@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from transformers import pipeline, AutoModelForSeq2SeqLM, AutoTokenizer
+import uvicorn
 import os
 
 app = FastAPI()
@@ -63,3 +64,7 @@ async def traducir_texto(request: Request):
 
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
